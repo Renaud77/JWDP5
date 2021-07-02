@@ -11,10 +11,11 @@ const displayCamera = async (cameras) => {
     document.body.querySelector("#camerasDisplay").innerHTML += `
  
  <div class="card_product">
-    <img src="${camera.imageUrl}"
-    <h3>${camera.name}</h3>
-    <span>${camera.description}</span>
-    <span>${camera.price}</span>
+    <img src="${camera.imageUrl}">
+    <div class="card_product-text">
+      <h3>${camera.name}</h3>
+      <span>${camera.price}</span>
+    </div>
  </div>
  
  `;
