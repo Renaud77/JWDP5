@@ -1,5 +1,10 @@
 .navbar_logo img {
   height: 80px;
   width: 80px;
-  display: flex;
+}
+
+.title {
+  font-family: yellowtail;
+  font-size: 50px;
+  margin-left: 10px;
 }
