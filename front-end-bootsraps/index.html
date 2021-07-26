@@ -21,7 +21,8 @@
     <title>Ornicam</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-dark">
+    <nav class="navbar navbar-expand-md navbar-light" style="background-color: rgba(38, 36, 36, 0.459)";
+    ">
       <div>
         <a class="nav-link d-flex align-items-center" href="#"
           ><img
@@ -48,14 +49,28 @@
           <ul class="navbar-nav d-flex">
             <li class="nav-item">
               <a
-                class="nav-link text-light fw-bold text-uppercase px-2"
+                class="
+                  nav-link
+                  navbar_links
+                  text-light
+                  fw-bold
+                  text-uppercase
+                  px-2
+                "
                 href="#"
                 >Acceuil</a
               >
             </li>
             <li class="nav-item">
               <a
-                class="nav-link text-light fw-bold text-uppercase px-2"
+                class="
+                  nav-link
+                  navbar_links
+                  text-light
+                  fw-bold
+                  text-uppercase
+                  px-2
+                "
                 href="#"
                 >Contact</a
               >
@@ -76,6 +91,38 @@
         </div>
       </div>
     </nav>
+    <main>
+      <section class="title">
+        <div class="row">
+          <div class="col-xs-12 bg-primary bg-gradient">
+            <h2 class="title-page text-warning d-flex justify-content-center">
+              Selectionner l'appareil de votre choix :
+            </h2>
+          </div>
+        </div>
+      </section>
+      <section class="camera_display">
+        <a href="#">
+          <div
+            id="camerasDisplay"
+            class="d-flex flex-wrap bg-light bg-gradient"
+          ></div>
+        </a>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="footer_contact">
+        <h2 class="footer_h2">Assistance</h2>
+        <a class="footer_link" href="contact.html">Nous contacter</a>
+        <a class="footer_link" href="#">Centre d'aide</a>
+      </div>
+      <div class="footer_about">
+        <h2 class="footer_h2">À propos</h2>
+        <a class="footer_link" href="#">Données et confidentialité</a>
+        <a class="footer_link" href="#">Condition générales de vente</a>
+        <a class="footer_link" href="#">Fonctionnement du site</a>
+      </div>
+    </footer>
 
     <script src="./bootsraps-js/bootstrap.min.js"></script>
     <script src="./index.js"></script>

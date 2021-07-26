@@ -8,3 +8,59 @@
   font-size: 50px;
   margin-left: 10px;
 }
+* {
+  font-family: roboto;
+}
+.title-page {
+  font-family: yellowtail;
+  color: yellow;
+}
+.camera_display a {
+  text-decoration: none;
+}
+
+/* css footer */
+.footer {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  background-color: rgba(38, 36, 36, 0.459);
+  padding: 10px;
+}
+.footer_link {
+  height: 20px;
+  color: white;
+  text-decoration: none;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.footer_link:hover {
+  color: white;
+  text-decoration: underline;
+}
+.footer_link:visited {
+  color: white;
+  text-decoration: none;
+}
+.footer_about {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-right: 5%;
+}
+.footer_contact {
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin-right: 5%;
+}
+.footer_h2 {
+  color: white;
+  padding-left: 10px;
+  text-decoration: underline;
+}
