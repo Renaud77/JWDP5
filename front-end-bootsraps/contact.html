@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -18,7 +18,9 @@
       integrity="sha384-SZXxX4whJ79/gErwcOYf+zWLeJdY/qpuqC4cAa9rOGUstPomtqpuNWT9wdPEn2fk"
       crossorigin="anonymous"
     />
-    <title>Ornicam</title>
+    <link rel="stylesheet" href="./contact.css">
+
+    <title>Ornicam - Contact</title>
   </head>
   <body>
     <nav class="navbar navbar-expand-md navbar-light" style="background-color: rgba(38, 36, 36, 0.459)";
@@ -92,37 +94,67 @@
       </div>
     </nav>
     <main>
-      <section class="title">
-        <div class="row">
-          <div class="col-xs-12 bg-primary bg-gradient">
-            <h2 class="title-page text-warning d-flex justify-content-center">
-              Selectionner l'appareil de votre choix :
-            </h2>
-          </div>
-        </div>
-      </section>
-      <section class="camera_display">
-          <div
-            id="camerasDisplay"
-            class="d-flex flex-wrap bg-light bg-gradient"
-          ></div>
-      </section>
+        <h2>Formulaire de contact</h2>
+        <form name="myForm" action="/file.php" onsubmit="return validateForm()" method="post">
+           <table class="form-style">
+              <tr>
+                 <td>
+                    <label>
+                       Votre nom <span class="required">*</span>
+                    </label>
+                 </td>
+                 <td>
+                    <input type="text" name="name" class="long"/>
+                    <span class="error" id="errorname"></span>
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>
+                       Votre adresse e-mail <span class="required">*</span>
+                    </label>
+                 </td>
+                 <td>
+                    <input type="email" name="email" class="long"/>
+                    <span class="error" id="erroremail"></span>
+                 </td>
+              </tr>
+              <tr>
+                 <td>
+                    <label>
+                       Message <span class="required">*</span>
+                    </label>
+                 </td>
+                 <td>
+                    <textarea name="message" class="long field-textarea"></textarea>
+                    <span class="error" id="errormsg"></span>
+                 </td>
+              </tr>
+              <tr>
+                 <td></td>
+                 <td>
+                    <input type="submit" value="Envoyer">      
+                    <input type="reset" value="Réinitialiser"> 
+                 </td>
+              </tr>
+           </table>
+        </form>
+  
     </main>
     <footer class="footer">
-      <div class="footer_contact">
-        <h2 class="footer_h2">Assistance</h2>
-        <a class="footer_link" href="contact.html">Nous contacter</a>
-        <a class="footer_link" href="#">Centre d'aide</a>
-      </div>
-      <div class="footer_about">
-        <h2 class="footer_h2">À propos</h2>
-        <a class="footer_link" href="#">Données et confidentialité</a>
-        <a class="footer_link" href="#">Condition générales de vente</a>
-        <a class="footer_link" href="#">Fonctionnement du site</a>
-      </div>
-    </footer>
-
-    <script src="./bootsraps-js/bootstrap.min.js"></script>
-    <script src="./js/index.js"></script>
+        <div class="footer_contact">
+          <h3 class="footer_h2">Assistance</h3>
+          <a class="footer_link" href="contact.html">Nous contacter</a>
+          <a class="footer_link" href="#">Centre d'aide</a>
+        </div>
+        <div class="footer_about">
+          <h3 class="footer_h2">À propos</h3>
+          <a class="footer_link" href="#">Données et confidentialité</a>
+          <a class="footer_link" href="#">Condition générales de vente</a>
+          <a class="footer_link" href="#">Fonctionnement du site</a>
+        </div>
+      </footer>
+      <script src="./bootsraps-js/bootstrap.min.js"></script>
+      <script src="./js/contact.js"></script>
   </body>
 </html>
