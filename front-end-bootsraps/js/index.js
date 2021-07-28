@@ -1,3 +1,5 @@
+// Appel API des produits
+
 let response;
 
 const getCameraProduct = async () => {
@@ -9,12 +11,15 @@ const getCameraProduct = async () => {
 const displayCamera = async (cameras) => {
   cameras.forEach((camera) => {
     document.body.querySelector("#camerasDisplay").innerHTML += `
- <div class="card mx-auto m-3" style="width: 25rem;" >
-    <img class="card-img-top" style="height:12rem; object-fit:cover" src="${camera.imageUrl}">
+ <div onclick="window.location.replace('description.html?id=${
+   camera._id
+ }')" class="card mx-auto m-3" style="width: 25rem;" >
+    <img class="card-img-top" style="height:12rem; object-fit:cover" src="${
+      camera.imageUrl
+    }">
     <div class="card-body d-flex flex-column ">
       <h3 class="card-title">${camera.name}</h3>
-      <span>${camera.price}€</span>
-      <a href="#" class="btn btn-warning">Commander</a>
+      <span>${camera.price / 100}€</span>
     </div>
  </div>
  
