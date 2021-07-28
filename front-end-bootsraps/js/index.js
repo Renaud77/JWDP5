@@ -19,7 +19,7 @@ const displayCamera = async (cameras) => {
     }">
     <div class="card-body d-flex flex-column ">
       <h3 class="card-title">${camera.name}</h3>
-      <span>${camera.price / 100}€</span>
+      <span class="fw-bold text-primary">${camera.price / 100}€</span>
     </div>
  </div>
  
