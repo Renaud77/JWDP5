@@ -43,15 +43,31 @@ const showCameraProduct = async (camera) => {
 
 showCameraProduct(getCameraProduct());
 
-const addQuantity = () => {
-  const ls = localStorage.getItem("basket");
-  const arrayBasket = ls.split(",");
-  console.log(arrayBasket);
+// locale storage
+
+const addQuantity = (item, basket) => {
+  for (let index = 0; index < basket.length; index++) {
+    // boucle for pour incrementer les items
+    const element = basket[index]; // const pour selectionner 1 element du tableau
+    if (item.id === element.id) {
+      // condition de la fonction strictement egal pour eviter la casse
+      const newBasket = basket.filter((items) => items.id !== element.id); // utilisation de la methode filter
+      item.quantity += Number(element.quantity); // addition des quantite lorsque l'on ajoute au panier
+      if (item.quantity > 9) item.quantity = 9; // condition pour arrete l'ajout d'article au dessus de
+      return localStorage.setItem(
+        "basket", // return du setItem pour eviter d'ecraser le local storage a chaque ajout
+        JSON.stringify([...newBasket, item])
+      );
+    }
+  }
+  localStorage.setItem("basket", JSON.stringify([...basket, item]));
 };
 
 function addToBasket(id) {
+  const basket = JSON.parse(localStorage.getItem("basket"));
   const quantity = document.querySelector("#quantity").value;
-  localStorage.setItem("basket", [id, quantity]);
-}
+  const item = { id, quantity: Number(quantity) };
 
-addQuantity();
+  if (!basket) return localStorage.setItem("basket", JSON.stringify([item]));
+  addQuantity(item, basket);
+}
