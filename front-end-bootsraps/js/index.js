@@ -13,7 +13,7 @@ const displayCamera = async (cameras) => {
     document.body.querySelector("#camerasDisplay").innerHTML += `
  <div onclick="window.location.replace('description.html?id=${
    camera._id
- }')" class="card mx-auto m-3" style="width: 25rem;" >
+ }')" class="card mx-auto m-3 rounded" style="width: 25rem;" >
     <img class="card-img-top" style="height:12rem; object-fit:cover" src="${
       camera.imageUrl
     }">

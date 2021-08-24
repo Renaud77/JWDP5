@@ -66,7 +66,12 @@ const addQuantity = (item, basket) => {
 function addToBasket(id) {
   const basket = JSON.parse(localStorage.getItem("basket"));
   const quantity = document.querySelector("#quantity").value;
-  const item = { id, quantity: Number(quantity) };
+  const lensesOption = document.querySelector("#lenses_option").value;
+  const item = {
+    id,
+    quantity: Number(quantity),
+    lensesOption,
+  };
 
   if (!basket) return localStorage.setItem("basket", JSON.stringify([item]));
   addQuantity(item, basket);
