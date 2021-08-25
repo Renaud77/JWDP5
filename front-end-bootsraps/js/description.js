@@ -23,10 +23,10 @@ const showCameraProduct = async (camera) => {
       <span class="fw-bold text-primary">${camera.price / 100}€</span>
       <form id="lenses_option">
         <label for="lenses_option">Choisissez votre objectif:</label>
-          <select name="lenses_option" id="lenses_option">
+          <select name="lenses_option" id='lensesOption'>
             <option value="lenses">--Selectionnez votre objectif ici--</option>
             ${camera.lenses.map(
-              (lense) => `<option id="lenses_option">${lense}</option>`
+              (lense) => `<option value="1">${lense}</option>`
             )}
           </select>
         <label for="quantity">Selectionner votre quantité :</label>
@@ -34,7 +34,7 @@ const showCameraProduct = async (camera) => {
       </form>
       <input type="submit" onClick="addToBasket('${
         camera._id
-      }' )" class="btn btn-warning mt-4" value="Ajouter au panier">
+      }')" class="btn btn-warning mt-4" value="Ajouter au panier">
     </div>
   </div>
 
@@ -53,7 +53,14 @@ const addQuantity = (item, basket) => {
       // condition de la fonction strictement egal pour eviter la casse
       const newBasket = basket.filter((items) => items.id !== element.id); // utilisation de la methode filter
       item.quantity += Number(element.quantity); // addition des quantite lorsque l'on ajoute au panier
-      if (item.quantity > 9) item.quantity = 9; // condition pour arrete l'ajout d'article au dessus de
+      element.lenses.forEach((lense) => {
+        if (item.lenses[0].lenseName === lense.lenseName)
+          return (item.lenses[0].quantity += lense.quantity); //Commente tout ça poulet
+      });
+      const newItemLense = element.lenses.filter(
+        (lense) => lense.lenseName !== item.lenses[0].lenseName
+      );
+      item.lenses = [...newItemLense, item.lenses[0]];
       return localStorage.setItem(
         "basket", // return du setItem pour eviter d'ecraser le local storage a chaque ajout
         JSON.stringify([...newBasket, item])
@@ -66,11 +73,12 @@ const addQuantity = (item, basket) => {
 function addToBasket(id) {
   const basket = JSON.parse(localStorage.getItem("basket"));
   const quantity = document.querySelector("#quantity").value;
-  const lensesOption = document.querySelector("#lenses_option").value;
+  const lensesOption = document.getElementById("lensesOption");
+  const lenseSelect = lensesOption.options[lensesOption.selectedIndex].text;
   const item = {
     id,
     quantity: Number(quantity),
-    lensesOption,
+    lenses: [{ quantity: Number(quantity), lenseName: lenseSelect }],
   };
 
   if (!basket) return localStorage.setItem("basket", JSON.stringify([item]));
