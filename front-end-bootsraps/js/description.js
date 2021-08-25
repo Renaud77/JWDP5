@@ -24,7 +24,7 @@ const showCameraProduct = async (camera) => {
       <form id="lenses_option">
         <label for="lenses_option">Choisissez votre objectif:</label>
           <select name="lenses_option" id='lensesOption'>
-            <option value="lenses">--Selectionnez votre objectif ici--</option>
+            <option value="lenses">Ne pas fournir d'objectif</option>
             ${camera.lenses.map(
               (lense) => `<option value="1">${lense}</option>`
             )}
@@ -50,17 +50,17 @@ const addQuantity = (item, basket) => {
     // boucle for pour incrementer les items
     const element = basket[index]; // const pour selectionner 1 element du tableau
     if (item.id === element.id) {
-      // condition de la fonction strictement egal pour eviter la casse
       const newBasket = basket.filter((items) => items.id !== element.id); // utilisation de la methode filter
       item.quantity += Number(element.quantity); // addition des quantite lorsque l'on ajoute au panier
       element.lenses.forEach((lense) => {
         if (item.lenses[0].lenseName === lense.lenseName)
-          return (item.lenses[0].quantity += lense.quantity); //Commente tout ça poulet
+          // Si l'item choisis par l'utilisateur contient une lense qui est égal aux lenses déja dans le panier on exécute la condition
+          return (item.lenses[0].quantity += lense.quantity); // On augmente la quantité de la lense en fonction de la quatité choisis par l'utilisateur
       });
       const newItemLense = element.lenses.filter(
-        (lense) => lense.lenseName !== item.lenses[0].lenseName
+        (lense) => lense.lenseName !== item.lenses[0].lenseName // On crée un nouveau tableau à partir de l'ancien tableau ( element.lenses ), et on ne garde seulement les lense qui sont différente de la lense choisie par l'utilisateur
       );
-      item.lenses = [...newItemLense, item.lenses[0]];
+      item.lenses = [...newItemLense, item.lenses[0]]; // On combine la lense choisie par l'utilisateur et celle choisis précedement
       return localStorage.setItem(
         "basket", // return du setItem pour eviter d'ecraser le local storage a chaque ajout
         JSON.stringify([...newBasket, item])
