@@ -10,22 +10,39 @@
 // on reutilise la const basket pour allez chercher nos info dans le localStorage
 
 const basket = JSON.parse(localStorage.getItem("basket"));
-console.log(basket);
 
-// on le affiche ensuite
+// on l' affiche ensuite
 
 const displayItems = document.querySelector("#container_basket");
-console.log(displayItems);
 
 // message si le panier es vide
 
 if (basket === null) {
   const emptyBasket = `    
-  <div class="empty_basket">
-    <h2 class="empty_basket-text">Votre panier es vide</h2>
+  <div class="empty_basket d-flex justify-content-center">
+    <h2 class="empty_basket-text ">Votre panier es vide.</br><i class="far fa-sad-tear d-flex justify-content-center"></i></h2>
   </div>
 `;
-  basket.innerHTML = emptyBasket;
+  displayItems.innerHTML = emptyBasket;
 } else {
-  console.log("je ne suis pas vide");
+  let itemInTheBasket = [];
+
+  for (let k = 0; k < basket.length; k++) {
+    itemInTheBasket =
+      itemInTheBasket +
+      `
+      <div class="item_the_basket d-flex justify-content-around align-items-center flex-wrap ">
+        <p>Nom:${basket[k].id.name}</p>
+        <p>Quantité:${basket[k].quantity}</p>
+        <p>Option et sa Quantité:${
+          basket[k].lenses[0].lenseName +
+          "   en quantité de:  " +
+          basket[k].lenses[0].quantity
+        }</p>
+        <p>Prix:${basket[k].price}</p>
+        <p> Supprimer l'arcticle</p>
+      </div>
+`;
+    displayItems.innerHTML = itemInTheBasket;
+  }
 }
