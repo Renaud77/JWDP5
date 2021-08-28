@@ -4,7 +4,6 @@ let response;
 
 const getCameraProduct = async () => {
   const response = await fetch("http://localhost:3000/api/cameras");
-  //   console.log(await response.json());
   return response.json();
 };
 
