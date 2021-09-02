@@ -15,22 +15,23 @@ const showCameraProduct = async (camera) => {
   const cameraProduct = document.querySelector("#product");
 
   cameraProduct.innerHTML = `
-  <div class="card mx-auto m-5" style="width: 25rem;" >
+  <div class="card mx-auto m-5" style="width: 20rem;" >
     <img class="card-img-top" src="${camera.imageUrl}">
     <div class="card-body d-flex flex-column ">
       <h3 class="card-title mb-3">${camera.name}</h3>
       <span class="fst-italic mb-3">${camera.description}</span>
-      <span class="fw-bold text-primary">${camera.price / 100}€</span>
+      <span class="fw-bold text-primary border border-2 border-primary d-flex ms-auto mb-2 mt-auto" style="width: fit-content; padding:3px">${(
+        camera.price / 100
+      ).toFixed(2)}€</span>
       <form id="lenses_option">
         <label for="lenses_option">Choisissez votre objectif:</label>
           <select name="lenses_option" id='lensesOption'>
-            <option value="lenses">Ne pas fournir d'objectif</option>
             ${camera.lenses.map(
               (lense) => `<option value="1">${lense}</option>`
             )}
           </select>
         <label for="quantity">Selectionner votre quantité :</label>
-          <input type="number" id="quantity" name="quantity" value="1" min="1" max="9" placeholder"1">
+          <input type="number" id="quantity" name="quantity" value="1" min="1" max="99" placeholder"1">
       </form>
       <input type="submit" onClick="addToBasket('${
         camera._id

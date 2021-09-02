@@ -18,7 +18,9 @@ const displayCamera = async (cameras) => {
     }">
     <div class="card-body d-flex flex-column ">
       <h3 class="card-title">${camera.name}</h3>
-      <span class="fw-bold text-primary">${camera.price / 100}€</span>
+      <span class="fw-bold text-primary border border-2 border-primary d-flex ms-auto mb-2 mt-auto" style="padding: 3px">${(
+        camera.price / 100
+      ).toFixed(2)}€</span>
     </div>
  </div>
  
@@ -26,6 +28,5 @@ const displayCamera = async (cameras) => {
  `;
   });
 };
-// displayCamera(getCameraProduct());
 
 (async () => await displayCamera(await getCameraProduct()))();
