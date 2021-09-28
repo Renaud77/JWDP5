@@ -61,31 +61,17 @@
                 >Acceuil</a
               >
             </li>
-            <li class="nav-item">
-              <a
-                class="
-                  nav-link
-                  navbar_links
-                  text-light
-                  fw-bold
-                  text-uppercase
-                  px-2
-                "
-                href="./contact.html"
-                >Contact</a
-              >
-            </li>
           </ul>
         </div>
         <div class="mx-2 d-flex align-items-center">
           <i class="fas fa-shopping-cart fa-lg text-light"></i>
-          <ul class="navbar-nav d-flex">
+          <ul class="navbar-nav d-flex justify-content-center">
             <li class="nav-item">
               <a
                 class="nav-link text-light fw-bold text-uppercase px-2"
                 href="./basket.html"
                 >Panier</a
-              ><span id="bubble-items"></span>
+              ><span id="bubble-items" class="d-flex"></span>
             </li>
           </ul>
         </div>
@@ -99,11 +85,12 @@
         </div>
         <div id="container_basket">
         </div>
-
+        <div id="price_for_the_basket"></div>
       </section>
+
     </main>
 
   </body>
   <script src="./bootsraps-js/bootstrap.min.js"></script>
-  <script src="./js/basket.js"></script>
+  <script src="./js/basket.js" type="module"></script>
 </html>

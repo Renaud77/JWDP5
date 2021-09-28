@@ -1,4 +1,5 @@
 // Appel API des produits
+import { numberItemInTheBasket } from "./nuberItems.js";
 
 let response;
 
@@ -30,3 +31,4 @@ const displayCamera = async (cameras) => {
 };
 
 (async () => await displayCamera(await getCameraProduct()))();
+numberItemInTheBasket();

@@ -1,3 +1,5 @@
+import { numberItemInTheBasket } from "./nuberItems.js";
+
 const getCameraProduct = async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");
@@ -38,7 +40,6 @@ const showCameraProduct = async (camera) => {
       }')" class="btn btn-warning mt-4" value="Ajouter au panier">
     </div>
   </div>
-
       `;
 };
 
@@ -84,4 +85,11 @@ function addToBasket(id) {
 
   if (!basket) return localStorage.setItem("basket", JSON.stringify([item]));
   addQuantity(item, basket);
+
+  numberItemInTheBasket();
 }
+window.addToBasket = (id) => {
+  console.log(id);
+  addToBasket(id);
+};
+numberItemInTheBasket();
