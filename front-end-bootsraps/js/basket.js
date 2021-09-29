@@ -52,19 +52,9 @@ displayBasket();
 //*************************************************************************************************************************//
 
 //***********************************************************calcul du montant total des prix ajouter au localstorage******//
+// vatiable prix total du panier
 
-// const priceForTheBasket = () => {
-//   const priceForTheBasketHTML = document.querySelector("#price_for_the_basket");
-//   let TotalAmountPrice = 0;
-//   if (!basket) return null;
-//   basket.forEach((element) => {
-//     TotalAmountPrice += element.price;
-//   });
-//   console.log(TotalAmountPrice);
-//   priceForTheBasketHTML.innerHTML = `<span>${TotalAmountPrice}</span>`;
-// };
-
-// priceForTheBasket();
+//  faire une boucle qui vas chercher les prix
 
 //********************************************************************************************************************************** */
 
@@ -122,7 +112,45 @@ console.log(document.querySelector("#get_form_value"));
 
 function getFormValue() {
   // envoie des donnee dans le localStorage
-  localStorage.setItem("prenom", document.querySelector("#prenom").value);
+  const formulaireValue = {
+    Nom: document.querySelector("#name").value,
+    Prenom: document.querySelector("#prenom").value,
+    Email: document.querySelector("#email").value,
+    Adresse: document.querySelector("#adress").value,
+    Ville: document.querySelector("#ville").value,
+    CodePostal: document.querySelector("#code_postal").value,
+  };
+  localStorage.setItem("formulaireValues", JSON.stringify(formulaireValue));
 
-  // recuperation des valeur du local storage pour les mettre dans un objet
+  const aEnvoyer = {
+    basket,
+    formulaireValue,
+  };
+
+  console.log(aEnvoyer);
 }
+
+window.getFormValue = getFormValue;
+//----------------------------------------------------------------------------------------------------------------------------------
+
+//-------------------------------------------recuperer les infos du LS pour qu'il reste dans les champs utilisateur ------------------
+
+// recuperation de la key formulaireValues dans le LS
+
+const dataLocalStorage = localStorage.getItem("formulaireValues");
+
+// convertir la chaine de caractere en objet JS
+
+const dataLocalStorageObject = JSON.parse(dataLocalStorage);
+
+// rediriger les value du LS dans les champs du formulaire
+
+document.querySelector("#name").value = dataLocalStorageObject.Nom;
+document.querySelector("#prenom").value = dataLocalStorageObject.Prenom;
+document.querySelector("#email").value = dataLocalStorageObject.Email;
+document.querySelector("#adress").value = dataLocalStorageObject.Adress;
+document.querySelector("#ville").value = dataLocalStorageObject.Ville;
+document.querySelector("#code_postal").value =
+  dataLocalStorageObject.CodePostal;
+
+//--------------------------------------------------------------------------------------------------------

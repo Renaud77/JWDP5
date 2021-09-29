@@ -89,7 +89,6 @@ function addToBasket(id) {
   numberItemInTheBasket();
 }
 window.addToBasket = (id) => {
-  console.log(id);
   addToBasket(id);
 };
 numberItemInTheBasket();
