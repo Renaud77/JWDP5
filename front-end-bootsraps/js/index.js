@@ -1,8 +1,6 @@
 // Appel API des produits
 import { numberItemInTheBasket } from "./nuberItems.js";
 
-let response;
-
 const getCameraProduct = async () => {
   const response = await fetch("http://localhost:3000/api/cameras");
   return response.json();
@@ -31,4 +29,4 @@ const displayCamera = async (cameras) => {
 };
 
 (async () => await displayCamera(await getCameraProduct()))();
-numberItemInTheBasket();
+window.numberItemInTheBasket = numberItemInTheBasket();

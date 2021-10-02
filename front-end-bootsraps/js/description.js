@@ -91,4 +91,4 @@ function addToBasket(id) {
 window.addToBasket = (id) => {
   addToBasket(id);
 };
-numberItemInTheBasket();
+window.numberItemInTheBasket = numberItemInTheBasket();

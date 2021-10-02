@@ -35,7 +35,7 @@ const displayBasket = async () => {
     itemInTheBasket =
       itemInTheBasket +
       `
-      <div class="item_the_basket d-flex justify-content-around align-items-center flex-wrap mb-3 border border-dark p-2 ">
+      <div class="item_the_basket d-flex justify-content-around align-items-center flex-wrap mb-2 border border-dark p-2 ">
         <img style="width: 100px" src="${itemInfo.imageUrl}">  
         <p>Nom: ${itemInfo.name}</p>
         <p>Quantité: ${item.quantity}</p>
@@ -46,10 +46,35 @@ const displayBasket = async () => {
 `;
     displayItems.innerHTML = itemInTheBasket;
   }
+  //-----------------------------------------------btn pour vider le panier (dans la fonction displayBasket)------------------------------------------------------------
+
+  // code du btn supprimer
+
+  const btnClearBasket = `<button onClick="clearBasket()" id="clear_basket_btn" class="btn btn-warning d-flex justify-content-center m-auto mb-2 w-25 border border-dark">Vider votre panier</button>`;
+
+  //insert le boutton dans mon html
+
+  displayItems.insertAdjacentHTML("beforeend", btnClearBasket);
+
+  //------------------------------------------------------------------------------------------------------------------------------------
 };
 
 displayBasket();
-//*************************************************************************************************************************//
+//***********************************************************************************************************************************//
+
+//---------------------------------------------fonction pour le onClick du btn "vider le panier "-----------------------------------------
+function clearBasket() {
+  //.remove item pour enlever la clef dans le LS
+  localStorage.removeItem("basket");
+
+  //alert pour informer le client
+  alert("votre panier es maintenant vide");
+
+  // rafraichir la page panier
+  window.location.href =
+    "http://127.0.0.1:5501/front-end-bootsraps/basket.html";
+}
+window.clearBasket = clearBasket;
 
 //***********************************************************calcul du montant total des prix ajouter au localstorage******//
 // vatiable prix total du panier
@@ -116,7 +141,7 @@ function getFormValue() {
     Nom: document.querySelector("#name").value,
     Prenom: document.querySelector("#prenom").value,
     Email: document.querySelector("#email").value,
-    Adresse: document.querySelector("#adress").value,
+    Adress: document.querySelector("#adress").value,
     Ville: document.querySelector("#ville").value,
     CodePostal: document.querySelector("#code_postal").value,
   };
