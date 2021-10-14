@@ -46,6 +46,7 @@ const displayBasket = async () => {
 `;
     displayItems.innerHTML = itemInTheBasket;
   }
+  //---------------------------------------------------------------------------------------------------------------------------------------------
   //-----------------------------------------------btn pour vider le panier (dans la fonction displayBasket)------------------------------------------------------------
 
   // code du btn supprimer
@@ -66,6 +67,7 @@ displayBasket();
 function clearBasket() {
   //.remove item pour enlever la clef dans le LS
   localStorage.removeItem("basket");
+  localStorage.removeItem("formulaireValues");
 
   //alert pour informer le client
   alert("votre panier es maintenant vide");
@@ -76,14 +78,8 @@ function clearBasket() {
 }
 window.clearBasket = clearBasket;
 
-//***********************************************************calcul du montant total des prix ajouter au localstorage******//
-// vatiable prix total du panier
-
-//  faire une boucle qui vas chercher les prix
-
-//********************************************************************************************************************************** */
-
-//----------------------------------------------- afficher le nombre de items dans la basket----------------------------
+//--------------------------------------------------------------------------------------------------------------------------------------
+//----------------------------------------------- afficher le nombre de items dans la basket------------------------------------------------
 
 numberItemInTheBasket();
 
@@ -133,6 +129,9 @@ const affichageDuFormulaire = () => {
 };
 affichageDuFormulaire();
 console.log(document.querySelector("#get_form_value"));
+
+//--------------------------------------------    FIN       ----------------------------------------------------------------------------------------------
+
 //----------------------------------- Recuperation des donner du formulaire -------------------------------
 
 function getFormValue() {
@@ -146,17 +145,10 @@ function getFormValue() {
     CodePostal: document.querySelector("#code_postal").value,
   };
   localStorage.setItem("formulaireValues", JSON.stringify(formulaireValue));
-
-  const aEnvoyer = {
-    basket,
-    formulaireValue,
-  };
-
-  console.log(aEnvoyer);
 }
 
 window.getFormValue = getFormValue;
-//----------------------------------------------------------------------------------------------------------------------------------
+//------------------------------------------------------   FIN      ----------------------------------------------------------------------------
 
 //-------------------------------------------recuperer les infos du LS pour qu'il reste dans les champs utilisateur ------------------
 

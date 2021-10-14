@@ -10,5 +10,4 @@ export const numberItemInTheBasket = () => {
     });
     notificationBasket.innerHTML = `<span class="m-auto">${amountItem}</span>`;
   }
-  console.log(amountItem);
 };
