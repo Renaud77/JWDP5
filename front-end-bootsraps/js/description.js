@@ -35,7 +35,7 @@ const showCameraProduct = async (camera) => {
         <label for="quantity">Selectionner votre quantité :</label>
           <input type="number" id="quantity" name="quantity" value="1" min="1" max="99" placeholder"1">
       </form>
-      <input type="submit" onClick="addToBasket('${
+      <input type="button" onClick="addToBasket('${
         camera._id
       }')" class="btn btn-warning mt-4" value="Ajouter au panier">
     </div>
@@ -74,7 +74,7 @@ const addQuantity = (item, basket) => {
 
 function addToBasket(id) {
   const basket = JSON.parse(localStorage.getItem("basket"));
-  const quantity = document.querySelector("#quantity").value;
+  const quantity = document.getElementById("quantity").value;
   const lensesOption = document.getElementById("lensesOption");
   const lenseSelect = lensesOption.options[lensesOption.selectedIndex].text;
   const item = {
@@ -91,4 +91,5 @@ function addToBasket(id) {
 window.addToBasket = (id) => {
   addToBasket(id);
 };
+
 window.numberItemInTheBasket = numberItemInTheBasket();

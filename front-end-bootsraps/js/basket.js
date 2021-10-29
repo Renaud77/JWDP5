@@ -104,22 +104,22 @@ const affichageDuFormulaire = () => {
     </div>
     <div class="form-row col-md-6 m-auto">
       <label for="email">Email</label>
-      <input type="email" class="form-control" id="email" placeholder="Email" required>
+      <input type="email" class="form-control" id="email" placeholder="Email">
     </div>
     <div class="form-row col-md-6 m-auto">
       <label for="adress">Adresse de livraison</label>
-      <input type="text" class="form-control" id="adress" placeholder="Avenue Leclerc">
+      <input type="text" class="form-control" id="adress" placeholder="Avenue Leclerc" required>
     </div>
     <div class="form-row col-md-6 m-auto">
       <label for="ville">Ville</label>
-      <input type="text" class="form-control" id="ville" placeholder="Paris"required>
+      <input type="text" class="form-control" id="ville" placeholder="Paris">
     </div>
     <div class="form-row col-md-6 m-auto">
       <label for="codepostal">Code Postal</label>
-      <input type="text" class="form-control" id="code_postal" placeholder="75000" required>
+      <input type="text" class="form-control" id="code_postal" placeholder="75000">
     </div>
     <div class="form-row col-md-2 m-auto mt-4">
-      <button type="submit" id="get_form_value" onClick="getFormValue()" class="btn btn-primary ">validé votre commande</button>
+      <button type="button" id="get_form_value" onClick="getFormValue()" class="btn btn-primary ">validé votre commande</button>
     </div>
   </form>
   `;
@@ -144,7 +144,43 @@ function getFormValue() {
     Ville: document.querySelector("#ville").value,
     CodePostal: document.querySelector("#code_postal").value,
   };
-  localStorage.setItem("formulaireValues", JSON.stringify(formulaireValue));
+
+  //----------------------------------------------------- Regex pour l'adress mail du formulaire ------------------------------------------------------
+  const regexEmail = (value) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  };
+
+  function emailControle() {
+    //controle de l'email
+    const lEmail = formulaireValue.Email;
+    if (regexEmail(lEmail)) {
+      return true;
+    } else {
+      alert("l'email n'es pas valide");
+      return false;
+    }
+  }
+  // on appel la function emailControle avant l'envoie au Local storage
+  if (emailControle()) {
+    localStorage.setItem("formulaireValues", JSON.stringify(formulaireValue));
+  } else {
+    alert("veuillez bien remplir le formulaire");
+  }
+  //--------------------------------------------------------------------FIN----------------------------------------------------------------------------------------
+  const aEnvoyer = {
+    basket,
+    formulaireValue,
+  };
+  console.log(aEnvoyer);
+  // // --------------------------------------------- envoie de la commande avec la methode POST ----------------------------------------------
+
+  // const promise01 = fetch(`http://localhost:3000/api/cameras`, {
+  //   method: "POST",
+  //   body: JSON.stringify(aEnvoyer),
+  //   headers: { "Content-Type": "application/json" },
+  // });
+  // promise01.then;
+  // //----------------------------------------------------------FIN--------------------------------------------------------------------------
 }
 
 window.getFormValue = getFormValue;
@@ -170,4 +206,4 @@ document.querySelector("#ville").value = dataLocalStorageObject.Ville;
 document.querySelector("#code_postal").value =
   dataLocalStorageObject.CodePostal;
 
-//--------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------------------------------------------------------------------------------------
