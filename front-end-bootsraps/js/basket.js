@@ -137,12 +137,12 @@ console.log(document.querySelector("#get_form_value"));
 function getFormValue() {
   // envoie des donnee dans le localStorage
   const formulaireValue = {
-    Nom: document.querySelector("#name").value,
-    Prenom: document.querySelector("#prenom").value,
-    Email: document.querySelector("#email").value,
-    Adress: document.querySelector("#adress").value,
-    Ville: document.querySelector("#ville").value,
-    CodePostal: document.querySelector("#code_postal").value,
+    lastName: document.querySelector("#name").value,
+    firstName: document.querySelector("#prenom").value,
+    email: document.querySelector("#email").value,
+    address: document.querySelector("#adress").value,
+    city: document.querySelector("#ville").value,
+    codePostal: document.querySelector("#code_postal").value,
   };
 
   //----------------------------------------------------- Regex pour l'adress mail du formulaire ------------------------------------------------------
@@ -152,7 +152,7 @@ function getFormValue() {
 
   function emailControle() {
     //controle de l'email
-    const lEmail = formulaireValue.Email;
+    const lEmail = formulaireValue.email;
     if (regexEmail(lEmail)) {
       return true;
     } else {
@@ -166,20 +166,25 @@ function getFormValue() {
   } else {
     alert("veuillez bien remplir le formulaire");
   }
+  const products = [];
+  basket.forEach((product) => {
+    products.push(product.id);
+  });
   //--------------------------------------------------------------------FIN----------------------------------------------------------------------------------------
-  const aEnvoyer = {
-    basket,
-    formulaireValue,
+  const order = {
+    products,
+    contact: formulaireValue,
   };
-  console.log(aEnvoyer);
+  console.log(order);
   // // --------------------------------------------- envoie de la commande avec la methode POST ----------------------------------------------
 
-  // const promise01 = fetch(`http://localhost:3000/api/cameras`, {
-  //   method: "POST",
-  //   body: JSON.stringify(aEnvoyer),
-  //   headers: { "Content-Type": "application/json" },
-  // });
-  // promise01.then;
+  const promise01 = fetch(`http://localhost:3000/api/cameras/order/`, {
+    method: "POST",
+    body: JSON.stringify(order),
+    headers: { "Content-Type": "application/json" },
+  });
+
+  console.log(promise01);
   // //----------------------------------------------------------FIN--------------------------------------------------------------------------
 }
 
@@ -198,12 +203,12 @@ const dataLocalStorageObject = JSON.parse(dataLocalStorage);
 
 // rediriger les value du LS dans les champs du formulaire
 
-document.querySelector("#name").value = dataLocalStorageObject.Nom;
-document.querySelector("#prenom").value = dataLocalStorageObject.Prenom;
-document.querySelector("#email").value = dataLocalStorageObject.Email;
-document.querySelector("#adress").value = dataLocalStorageObject.Adress;
-document.querySelector("#ville").value = dataLocalStorageObject.Ville;
+document.querySelector("#name").value = dataLocalStorageObject.lastName;
+document.querySelector("#prenom").value = dataLocalStorageObject.firstName;
+document.querySelector("#email").value = dataLocalStorageObject.email;
+document.querySelector("#adress").value = dataLocalStorageObject.address;
+document.querySelector("#ville").value = dataLocalStorageObject.city;
 document.querySelector("#code_postal").value =
-  dataLocalStorageObject.CodePostal;
+  dataLocalStorageObject.codePostal;
 
 //-------------------------------------------------------------------------------------------------------------------------------------------------------
