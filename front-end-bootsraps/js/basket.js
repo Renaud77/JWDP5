@@ -32,6 +32,7 @@ const displayBasket = async () => {
 
   for (let item of basket) {
     const itemInfo = await getCameraInfo(item.id);
+
     itemInTheBasket =
       itemInTheBasket +
       `
@@ -46,6 +47,12 @@ const displayBasket = async () => {
 `;
     displayItems.innerHTML = itemInTheBasket;
   }
+
+  let totalPrice = 0;
+  basket.forEach((element) => {
+    totalPrice += element.price;
+  });
+  console.log(totalPrice);
   //---------------------------------------------------------------------------------------------------------------------------------------------
   //-----------------------------------------------btn pour vider le panier (dans la fonction displayBasket)------------------------------------------------------------
 
@@ -186,6 +193,7 @@ function getFormValue() {
 
   console.log(promise01);
   // //----------------------------------------------------------FIN--------------------------------------------------------------------------
+  window.location.href = `order.html`;
 }
 
 window.getFormValue = getFormValue;
