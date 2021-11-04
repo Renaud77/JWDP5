@@ -1,5 +1,5 @@
 import { numberItemInTheBasket } from "./nuberItems.js";
-
+// ----------------------------------------------- function qui cree la page description en fonction du produit choisie --------------------------------
 const getCameraProduct = async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");
@@ -10,7 +10,8 @@ const getCameraProduct = async () => {
 
   return response.json();
 };
-
+// ----------------------------------------------------------- FIN --------------------------------------------------------------------------------
+//-----------------------------------------------------------fonction pour l'affichage du produit -------------------------------------------------
 const showCameraProduct = async (camera) => {
   camera = await camera;
 
@@ -22,7 +23,7 @@ const showCameraProduct = async (camera) => {
     <div class="card-body d-flex flex-column ">
       <h3 class="card-title mb-3">${camera.name}</h3>
       <span class="fst-italic mb-3">${camera.description}</span>
-      <span class="fw-bold text-primary border border-2 border-primary d-flex ms-auto mb-2 mt-auto" style="width: fit-content; padding:3px">${(
+      <span id="price" class="fw-bold text-primary border border-2 border-primary d-flex ms-auto mb-2 mt-auto" style="width: fit-content; padding:3px">${(
         camera.price / 100
       ).toFixed(2)}€</span>
       <form id="lenses_option">
@@ -42,11 +43,11 @@ const showCameraProduct = async (camera) => {
   </div>
       `;
 };
-
 showCameraProduct(getCameraProduct());
+// ------------------------------------------------------------------ FIN ------------------------------------------------------------------------
 
-// locale storage
-
+//  -------------------------------------------------------    envoi au locale storage --------------------------------------------------------------
+// ------------------------------------------------------  ajout de quantite dans le local storage
 const addQuantity = (item, basket) => {
   for (let index = 0; index < basket.length; index++) {
     // boucle for pour incrementer les items
@@ -71,7 +72,8 @@ const addQuantity = (item, basket) => {
   }
   localStorage.setItem("basket", JSON.stringify([...basket, item]));
 };
-
+// --------------------------------------------------------- FIN ---------------------------------------------------------------------------
+// ------------------------------- fonction pour cree le keys basket qui renvoie un objet lisible pour le locale storage -------------------------
 function addToBasket(id) {
   const basket = JSON.parse(localStorage.getItem("basket"));
   const quantity = document.getElementById("quantity").value;
@@ -91,5 +93,5 @@ function addToBasket(id) {
 window.addToBasket = (id) => {
   addToBasket(id);
 };
-
+// -------------------------------------------------------------- FIN --------------------------------------------------------------------------------
 window.numberItemInTheBasket = numberItemInTheBasket();

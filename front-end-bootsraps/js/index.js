@@ -1,12 +1,15 @@
-// Appel API des produits
+// -------------------------------------------------------------Appel API des produits-------------------------------------------
 import { numberItemInTheBasket } from "./nuberItems.js";
-
+//--------------------------------------------------------------FIN ------------------------------------------------------------
+//---------------------------------------------------- fonction pour faire la requete a l'api-------------------------------------
 const getCameraProduct = async () => {
   const response = await fetch("http://localhost:3000/api/cameras");
   return response.json();
 };
-
+//--------------------------------------------------- FIN ----------------------------------------------------------------------------
+//------------------------------------- fonction pour l'injection dans le html--------------------------------------------------------
 const displayCamera = async (cameras) => {
+  //boucle qui inject les produits dans mon html
   cameras.forEach((camera) => {
     document.body.querySelector("#camerasDisplay").innerHTML += `
  <div onclick="window.location.replace('description.html?id=${
@@ -29,4 +32,5 @@ const displayCamera = async (cameras) => {
 };
 
 (async () => await displayCamera(await getCameraProduct()))();
+//------------------------------------------------------------- FIN ------------------------------------------------------------------
 window.numberItemInTheBasket = numberItemInTheBasket();
