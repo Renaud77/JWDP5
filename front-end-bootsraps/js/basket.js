@@ -22,7 +22,7 @@ const displayBasket = async () => {
   if (basket === null) {
     const emptyBasket = `    
   <div class="empty_basket d-flex justify-content-center">
-    <h2 class="empty_basket-text ">Votre panier es vide.</br><i class="far fa-sad-tear d-flex justify-content-center"></i></h2>
+    <h2 class="empty_basket-text ">Votre panier est vide.</br><i class="far fa-sad-tear d-flex justify-content-center"></i></h2>
   </div>
   `;
     return (displayItems.innerHTML = emptyBasket);
@@ -195,7 +195,12 @@ async function getFormValue() {
   console.log(resAPI.orderId);
   localStorage.setItem("orderId", resAPI.orderId);
   // //----------------------------------------------------------FIN--------------------------------------------------------------------------
-  window.location.replace("./order.html");
+  if (emailControle()) {
+    localStorage.setItem("formulaireValues", JSON.stringify(formulaireValue));
+    window.location.replace("./order.html");
+  } else {
+    alert("veuillez bien remplir le formulaire");
+  }
 }
 
 window.getFormValue = getFormValue;
