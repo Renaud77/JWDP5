@@ -1,4 +1,5 @@
 import { numberItemInTheBasket } from "./nuberItems.js";
+let globalPrice = 0;
 
 //****************************************on recupere les info du local storage avec le methode get et fetch ****************//
 
@@ -32,7 +33,7 @@ const displayBasket = async () => {
 
   for (let item of basket) {
     const itemInfo = await getCameraInfo(item.id);
-
+    globalPrice += (itemInfo.price / 100) * item.quantity;
     itemInTheBasket =
       itemInTheBasket +
       `
@@ -43,16 +44,15 @@ const displayBasket = async () => {
         <p>Objectif: ${item.lenses[0].lenseName}</p>
         <p>Prix: ${((itemInfo.price / 100) * item.quantity).toFixed(2)}</p>
       </div>
-      
+
 `;
     displayItems.innerHTML = itemInTheBasket;
   }
-
-  let totalPrice = 0;
-  basket.forEach((element) => {
-    totalPrice += element.price;
-  });
+  const totalPrice = `<p class="item_the_basket d-flex justify-content-around align-items-center flex-wrap mb-2 border border-dark p-2">Montant total de ${globalPrice}€</p>`;
   console.log(totalPrice);
+  displayItems.insertAdjacentHTML("beforeend", totalPrice);
+  localStorage.setItem("totalPrice", globalPrice);
+
   //---------------------------------------------------------------------------------------------------------------------------------------------
   //-----------------------------------------------btn pour vider le panier (dans la fonction displayBasket)------------------------------------------------------------
 
@@ -66,7 +66,6 @@ const displayBasket = async () => {
 
   //------------------------------------------------------------------------------------------------------------------------------------
 };
-
 displayBasket();
 //***********************************************************************************************************************************//
 
@@ -126,7 +125,7 @@ const affichageDuFormulaire = () => {
       <input type="text" class="form-control" id="code_postal" placeholder="75000">
     </div>
     <div class="form-row col-md-2 m-auto mt-4">
-      <button type="button" id="get_form_value" onClick="getFormValue()" class="btn btn-primary ">validé votre commande</button>
+      <button type="button" id="get_form_value" onClick="getFormValue()" class="btn btn-warning border border-dark ">validé vos coordonnés</button>
     </div>
   </form>
   `;
@@ -141,14 +140,14 @@ console.log(document.querySelector("#get_form_value"));
 
 //----------------------------------- Recuperation des donner du formulaire -------------------------------
 
-function getFormValue() {
+async function getFormValue() {
   // envoie des donnee dans le localStorage
   const formulaireValue = {
-    lastName: document.querySelector("#name").value,
     firstName: document.querySelector("#prenom").value,
-    email: document.querySelector("#email").value,
+    lastName: document.querySelector("#name").value,
     address: document.querySelector("#adress").value,
     city: document.querySelector("#ville").value,
+    email: document.querySelector("#email").value,
     codePostal: document.querySelector("#code_postal").value,
   };
 
@@ -173,11 +172,11 @@ function getFormValue() {
   } else {
     alert("veuillez bien remplir le formulaire");
   }
+  //--------------------------------------------------------------------FIN----------------------------------------------------------------------------------------
   const products = [];
   basket.forEach((product) => {
     products.push(product.id);
   });
-  //--------------------------------------------------------------------FIN----------------------------------------------------------------------------------------
   const order = {
     products,
     contact: formulaireValue,
@@ -185,15 +184,18 @@ function getFormValue() {
   console.log(order);
   // // --------------------------------------------- envoie de la commande avec la methode POST ----------------------------------------------
 
-  const promise01 = fetch(`http://localhost:3000/api/cameras/order/`, {
+  const postAPI = await fetch(`http://localhost:3000/api/cameras/order/`, {
     method: "POST",
     body: JSON.stringify(order),
     headers: { "Content-Type": "application/json" },
   });
 
-  console.log(promise01);
+  const resAPI = await postAPI.json();
+
+  console.log(resAPI.orderId);
+  localStorage.setItem("orderId", resAPI.orderId);
   // //----------------------------------------------------------FIN--------------------------------------------------------------------------
-  window.location.href = `order.html`;
+  window.location.replace("./order.html");
 }
 
 window.getFormValue = getFormValue;
