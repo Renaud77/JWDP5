@@ -1,4 +1,4 @@
-import { numberItemInTheBasket } from "./nuberItems.js";
+import { numberItemInTheBasket } from "./numberItems.js";
 let globalPrice = 0;
 
 //****************************************on recupere les info du local storage avec le methode get et fetch ****************//

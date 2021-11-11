@@ -1,5 +1,5 @@
 // -------------------------------------------------------------Appel API des produits-------------------------------------------
-import { numberItemInTheBasket } from "./nuberItems.js";
+import { numberItemInTheBasket } from "./numberItems.js";
 //--------------------------------------------------------------FIN ------------------------------------------------------------
 //---------------------------------------------------- fonction pour faire la requete a l'api-------------------------------------
 const getCameraProduct = async () => {

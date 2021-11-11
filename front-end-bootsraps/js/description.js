@@ -1,4 +1,4 @@
-import { numberItemInTheBasket } from "./nuberItems.js";
+import { numberItemInTheBasket } from "./numberItems.js";
 // ----------------------------------------------- function qui cree la page description en fonction du produit choisie --------------------------------
 const getCameraProduct = async () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -12,7 +12,7 @@ const getCameraProduct = async () => {
 };
 // ----------------------------------------------------------- FIN --------------------------------------------------------------------------------
 //-----------------------------------------------------------fonction pour l'affichage du produit -------------------------------------------------
-const showCameraProduct = async (camera) => {
+async function showCameraProduct(camera) {
   camera = await camera;
 
   const cameraProduct = document.querySelector("#product");
@@ -42,7 +42,7 @@ const showCameraProduct = async (camera) => {
     </div>
   </div>
       `;
-};
+}
 showCameraProduct(getCameraProduct());
 // ------------------------------------------------------------------ FIN ------------------------------------------------------------------------
 
