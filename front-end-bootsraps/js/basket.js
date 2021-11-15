@@ -4,16 +4,20 @@ let globalPrice = 0;
 //****************************************on recupere les info du local storage avec le methode get et fetch ****************//
 
 const basket = JSON.parse(localStorage.getItem("basket"));
+
+/**
+ * Récupére les informations d'une caméra.
+ * @param id string L'id de la caméra à récupérer.
+ */
 const getCameraInfo = async (id) => {
   const response = await fetch(`http://localhost:3000/api/cameras/${id}`);
 
   return response.json();
 };
 
-//**********************************************************************************************************************************//
-
-//************************************  on l' affiche ensuite*******************************************************************//
-
+/**
+ * Affichage du panier.
+ */
 const displayBasket = async () => {
   const displayItems = document.querySelector("#container_basket");
 
@@ -21,13 +25,12 @@ const displayBasket = async () => {
 
   if (basket === null) {
     const emptyBasket = `    
-  <div class="empty_basket d-flex justify-content-center">
-    <h2 class="empty_basket-text ">Votre panier est vide.</br><i class="far fa-sad-tear d-flex justify-content-center"></i></h2>
-  </div>
-  `;
+      <div class="empty_basket d-flex justify-content-center">
+        <h2 class="empty_basket-text ">Votre panier est vide.</br><i class="far fa-sad-tear d-flex justify-content-center"></i></h2>
+      </div>
+      `;
     return (displayItems.innerHTML = emptyBasket);
   }
-  //****************************************************************************************************************************************
   //*******************************************si il y as des items dans le local storage  ********************************************//
   let itemInTheBasket = [];
 
@@ -37,15 +40,14 @@ const displayBasket = async () => {
     itemInTheBasket =
       itemInTheBasket +
       `
-      <div class="item_the_basket d-flex justify-content-around align-items-center flex-wrap mb-2 border border-dark p-2 ">
-        <img style="width: 100px" src="${itemInfo.imageUrl}">  
-        <p>Nom: ${itemInfo.name}</p>
-        <p>Quantité: ${item.quantity}</p>
-        <p>Objectif: ${item.lenses[0].lenseName}</p>
-        <p>Prix: ${((itemInfo.price / 100) * item.quantity).toFixed(2)}</p>
-      </div>
-
-`;
+        <div class="item_the_basket d-flex justify-content-around align-items-center flex-wrap mb-2 border border-dark p-2 ">
+          <img style="width: 100px" src="${itemInfo.imageUrl}">  
+          <p>Nom: ${itemInfo.name}</p>
+          <p>Quantité: ${item.quantity}</p>
+          <p>Objectif: ${item.lenses[0].lenseName}</p>
+          <p>Prix: ${((itemInfo.price / 100) * item.quantity).toFixed(2)}</p>
+        </div>
+      `;
     displayItems.innerHTML = itemInTheBasket;
   }
   const totalPrice = `<p class="item_the_basket d-flex justify-content-around align-items-center flex-wrap mb-2 border border-dark p-2">Montant total de ${globalPrice}€</p>`;
@@ -53,7 +55,6 @@ const displayBasket = async () => {
   displayItems.insertAdjacentHTML("beforeend", totalPrice);
   localStorage.setItem("totalPrice", globalPrice);
 
-  //---------------------------------------------------------------------------------------------------------------------------------------------
   //-----------------------------------------------btn pour vider le panier (dans la fonction displayBasket)------------------------------------------------------------
 
   // code du btn supprimer
@@ -67,9 +68,9 @@ const displayBasket = async () => {
   //------------------------------------------------------------------------------------------------------------------------------------
 };
 displayBasket();
-//***********************************************************************************************************************************//
-
-//---------------------------------------------fonction pour le onClick du btn "vider le panier "-----------------------------------------
+/**
+ * fonction pour le onClick du btn "vider le panier "
+ */
 function clearBasket() {
   //.remove item pour enlever la clef dans le LS
   localStorage.removeItem("basket");
@@ -84,14 +85,13 @@ function clearBasket() {
 }
 window.clearBasket = clearBasket;
 
-//--------------------------------------------------------------------------------------------------------------------------------------
 //----------------------------------------------- afficher le nombre de items dans la basket------------------------------------------------
 
 numberItemInTheBasket();
 
-//-------------------------------------------------------------------------------------------------------------------------
-//-----------------------------------------AFFICHER LE FORMULAIRE HTML---------------------------------------------------------------------
-
+/**
+ * Afficher le formulaire.
+ */
 const affichageDuFormulaire = () => {
   const displayForm = document.querySelector("#container_basket");
 
@@ -138,8 +138,9 @@ console.log(document.querySelector("#get_form_value"));
 
 //--------------------------------------------    FIN       ----------------------------------------------------------------------------------------------
 
-//----------------------------------- Recuperation des donner du formulaire -------------------------------
-
+/**
+ * Récupération des données du formulaire.
+ */
 async function getFormValue() {
   // envoie des donnee dans le localStorage
   const formulaireValue = {
@@ -150,7 +151,6 @@ async function getFormValue() {
     email: document.querySelector("#email").value,
     codePostal: document.querySelector("#code_postal").value,
   };
-
   //----------------------------------------------------- Regex pour l'adress mail du formulaire ------------------------------------------------------
   const regexEmail = (value) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -172,7 +172,9 @@ async function getFormValue() {
   } else {
     alert("veuillez bien remplir le formulaire");
   }
-  //--------------------------------------------------------------------FIN----------------------------------------------------------------------------------------
+  /**
+   * envoie de la commande avec la methode POST
+   */
   const products = [];
   basket.forEach((product) => {
     products.push(product.id);
@@ -182,7 +184,6 @@ async function getFormValue() {
     contact: formulaireValue,
   };
   console.log(order);
-  // // --------------------------------------------- envoie de la commande avec la methode POST ----------------------------------------------
 
   const postAPI = await fetch(`http://localhost:3000/api/cameras/order/`, {
     method: "POST",
@@ -194,19 +195,18 @@ async function getFormValue() {
 
   console.log(resAPI.orderId);
   localStorage.setItem("orderId", resAPI.orderId);
-  // //----------------------------------------------------------FIN--------------------------------------------------------------------------
   if (emailControle()) {
     localStorage.setItem("formulaireValues", JSON.stringify(formulaireValue));
-    window.location.replace("./order.html");
+    window.location.replace(`./order.html`);
   } else {
     alert("veuillez bien remplir le formulaire");
   }
 }
 
 window.getFormValue = getFormValue;
-//------------------------------------------------------   FIN      ----------------------------------------------------------------------------
-
-//-------------------------------------------recuperer les infos du LS pour qu'il reste dans les champs utilisateur ------------------
+/**
+ * recuperer les infos du LS pour qu'il reste dans les champs utilisateur
+ */
 
 // recuperation de la key formulaireValues dans le LS
 
@@ -225,5 +225,3 @@ document.querySelector("#adress").value = dataLocalStorageObject.address;
 document.querySelector("#ville").value = dataLocalStorageObject.city;
 document.querySelector("#code_postal").value =
   dataLocalStorageObject.codePostal;
-
-//-------------------------------------------------------------------------------------------------------------------------------------------------------

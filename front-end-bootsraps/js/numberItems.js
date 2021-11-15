@@ -1,3 +1,7 @@
+/**
+ * L'affichage du nombre de produit qu'il y as dans le panier
+ */
+
 export const numberItemInTheBasket = () => {
   const notificationBasket = document.querySelector("#bubble-items");
   let amountItem = 0;

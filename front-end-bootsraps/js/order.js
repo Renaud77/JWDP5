@@ -1,12 +1,22 @@
-//------------------ On vas chercher les information du local storage pour les injecters dans notre html ------------------------------------------
+const getCameraId = async () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const orderId = urlParams.get("orderId");
 
+  const response = await fetch(
+    `http://127.0.0.1:5501/front-end-bootsraps/order.html/${orderId}`
+  );
+
+  return response.json();
+};
+/**
+ * On vas chercher les information du local storage pour les injecters dans notre html
+ */
 const resumeOrder = () => {
   // variable pour recuperer les information
   const contactInLS = JSON.parse(localStorage.getItem("formulaireValues"));
   const orderId = JSON.stringify(localStorage.getItem("orderId"));
   const totalPrice = JSON.parse(localStorage.getItem("totalPrice"));
 
-  //   console.log(orderId);
   // on cible l'id dans le html pour y injecter les infos
   document.getElementById("text_container").innerHTML = `
     <div class="order-completed_container">
@@ -15,17 +25,16 @@ const resumeOrder = () => {
         <p>votre numero de commande es: ${orderId}</p>
         <p>votre commande es d'un montant total de ${totalPrice}€</p>
         <div class="">
-            <button type="button" id="submitOrder" onClick="submissionOrder()" class="btn btn-warning border border-dark ">validé votre commande</button>
+            <button type="button" id="submitOrder" onClick="submissionOrder()" class="btn btn-warning border border-dark">validé votre commande</button>
         </div>
     </div>
-    
-
-
-  
-  
   `;
 };
-resumeOrder();
+resumeOrder(getCameraId);
+
+/**
+ * fonction pour soumettre la commande et clear le local storage
+ */
 function submissionOrder() {
   localStorage.clear();
 

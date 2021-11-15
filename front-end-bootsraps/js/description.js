@@ -1,5 +1,7 @@
 import { numberItemInTheBasket } from "./numberItems.js";
-// ----------------------------------------------- function qui cree la page description en fonction du produit choisie --------------------------------
+/**
+ * function qui cree la page description en fonction du produit choisie
+ */
 const getCameraProduct = async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get("id");
@@ -10,8 +12,9 @@ const getCameraProduct = async () => {
 
   return response.json();
 };
-// ----------------------------------------------------------- FIN --------------------------------------------------------------------------------
-//-----------------------------------------------------------fonction pour l'affichage du produit -------------------------------------------------
+/**
+ *  On affiche les details que l'on veux sur le produit et on y met les option de quantité et un boutton pour ajouter au panier
+ */
 async function showCameraProduct(camera) {
   camera = await camera;
 
@@ -44,10 +47,9 @@ async function showCameraProduct(camera) {
       `;
 }
 showCameraProduct(getCameraProduct());
-// ------------------------------------------------------------------ FIN ------------------------------------------------------------------------
-
-//  -------------------------------------------------------    envoi au locale storage --------------------------------------------------------------
-// ------------------------------------------------------  ajout de quantite dans le local storage
+/**
+ * Rajouter un nouvel appareil au lieu de reinitialiser le local storage.
+ */
 const addQuantity = (item, basket) => {
   for (let index = 0; index < basket.length; index++) {
     // boucle for pour incrementer les items
@@ -72,8 +74,9 @@ const addQuantity = (item, basket) => {
   }
   localStorage.setItem("basket", JSON.stringify([...basket, item]));
 };
-// --------------------------------------------------------- FIN ---------------------------------------------------------------------------
-// ------------------------------- fonction pour cree le keys basket qui renvoie un objet lisible pour le locale storage -------------------------
+/**
+ * la fonction récupere les informations selectionées pour les envoyers au local storage
+ */
 function addToBasket(id) {
   const basket = JSON.parse(localStorage.getItem("basket"));
   const quantity = document.getElementById("quantity").value;
