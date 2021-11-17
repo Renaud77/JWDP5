@@ -1,5 +1,5 @@
 import { numberItemInTheBasket } from "./numberItems.js";
-//--------------------------------------------------------------FIN ------------------------------------------------------------
+
 /**
  * Attendre de recevoir les information API avant de s'executer grace a un appel fetch
  *
@@ -8,6 +8,7 @@ const getCameraProduct = async () => {
   const response = await fetch("http://localhost:3000/api/cameras");
   return response.json();
 };
+
 /**
  *  L'affichage des informations souhaiter a l'API et l'injecter dans son HTML
  */
@@ -28,12 +29,10 @@ const displayCamera = async (cameras) => {
       ).toFixed(2)}€</span>
     </div>
  </div>
- 
- 
  `;
   });
 };
 
 (async () => await displayCamera(await getCameraProduct()))();
-//------------------------------------------------------------- FIN ------------------------------------------------------------------
+
 window.numberItemInTheBasket = numberItemInTheBasket();

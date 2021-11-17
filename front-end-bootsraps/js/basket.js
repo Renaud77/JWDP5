@@ -67,7 +67,9 @@ const displayBasket = async () => {
 
   //------------------------------------------------------------------------------------------------------------------------------------
 };
+
 displayBasket();
+
 /**
  * fonction pour le onClick du btn "vider le panier "
  */
@@ -133,10 +135,8 @@ const affichageDuFormulaire = () => {
 
   displayForm.insertAdjacentHTML("afterend", formulaireHTML);
 };
-affichageDuFormulaire();
-console.log(document.querySelector("#get_form_value"));
 
-//--------------------------------------------    FIN       ----------------------------------------------------------------------------------------------
+affichageDuFormulaire();
 
 /**
  * Récupération des données du formulaire.
@@ -202,11 +202,7 @@ async function getFormValue() {
     alert("veuillez bien remplir le formulaire");
   }
 }
-
 window.getFormValue = getFormValue;
-/**
- * recuperer les infos du LS pour qu'il reste dans les champs utilisateur
- */
 
 // recuperation de la key formulaireValues dans le LS
 

@@ -1,13 +1,3 @@
-const getCameraId = async () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const orderId = urlParams.get("orderId");
-
-  const response = await fetch(
-    `http://127.0.0.1:5501/front-end-bootsraps/order.html/${orderId}`
-  );
-
-  return response.json();
-};
 /**
  * On vas chercher les information du local storage pour les injecters dans notre html
  */
@@ -25,23 +15,25 @@ const resumeOrder = () => {
         <p>votre numero de commande es: ${orderId}</p>
         <p>votre commande es d'un montant total de ${totalPrice}€</p>
         <div class="">
-            <button type="button" id="submitOrder" onClick="submissionOrder()" class="btn btn-warning border border-dark">validé votre commande</button>
+            <button type="button" id="submitOrder" onClick="returnToHome()" class="btn btn-warning border border-dark">Liste Produits</button>
         </div>
     </div>
   `;
+
+  // supression du local storage apres l'injection du html
+  localStorage.clear();
 };
-resumeOrder(getCameraId);
+resumeOrder();
 
 /**
- * fonction pour soumettre la commande et clear le local storage
+ * retoune sur la page d'acceuil
  */
-function submissionOrder() {
-  localStorage.clear();
-
+function returnToHome() {
   //alert pour remercier le client
   alert("Merci de votre commande a bientot");
 
   // retour a la page d'acceuil
   window.location.href = "http://127.0.0.1:5501/front-end-bootsraps/index.html";
 }
-window.submissionOrder = submissionOrder;
+
+window.returnToHome = returnToHome;

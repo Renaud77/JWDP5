@@ -1,4 +1,5 @@
 import { numberItemInTheBasket } from "./numberItems.js";
+
 /**
  * function qui cree la page description en fonction du produit choisie
  */
@@ -12,6 +13,7 @@ const getCameraProduct = async () => {
 
   return response.json();
 };
+
 /**
  *  On affiche les details que l'on veux sur le produit et on y met les option de quantité et un boutton pour ajouter au panier
  */
@@ -47,6 +49,7 @@ async function showCameraProduct(camera) {
       `;
 }
 showCameraProduct(getCameraProduct());
+
 /**
  * Rajouter un nouvel appareil au lieu de reinitialiser le local storage.
  */
@@ -74,6 +77,7 @@ const addQuantity = (item, basket) => {
   }
   localStorage.setItem("basket", JSON.stringify([...basket, item]));
 };
+
 /**
  * la fonction récupere les informations selectionées pour les envoyers au local storage
  */
@@ -93,8 +97,9 @@ function addToBasket(id) {
 
   numberItemInTheBasket();
 }
+
 window.addToBasket = (id) => {
   addToBasket(id);
 };
-// -------------------------------------------------------------- FIN --------------------------------------------------------------------------------
+
 window.numberItemInTheBasket = numberItemInTheBasket();
